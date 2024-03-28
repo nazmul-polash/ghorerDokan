@@ -1,17 +1,17 @@
 @extends('backend.layouts.template')
 
 @section('title')
-   Product || Sub-Category
+   Product || Child-Category
 @endsection
 @section('content')
    <div class="br-pagetitle">
       <i class="icon ion-ios-home-outline"></i>
       <div>
-         <h4>Sub-Category</h4>
-         <p class="mg-b-0">All Sub-Category </p>
+         <h4>Child-Category</h4>
+         <p class="mg-b-0">All Child-Category </p>
       </div>
       <div style="position: absolute; right:2%">
-         <a href="{{ route('sub_category.create') }}" class="btn btn-success  pd-y-12 pd-x-25 tx-mont tx-medium">Create Sub Category <i class="fa fa-plus"></i></a>
+         <a href="{{ route('child_category.create') }}" class="btn btn-primary  pd-y-12 pd-x-25 tx-mont tx-medium">Create Child Category <i class="fa fa-plus"></i></a>
       </div>
    </div>
    <div class="br-pagebody">
@@ -22,6 +22,7 @@
                   <tr>
                      <th>#</th>
                      <th>Category Name</th>
+                     <th>Sub Category</th>
                      <th>Parent Category</th>
                      <th>Meta Title</th>
                      <th>Meta Keyword</th>
@@ -43,10 +44,14 @@
          var table = $('.yajra-datatable').DataTable({
             processing: true,
             serverSide: true,
-            ajax: "{{ route('sub_category.index') }}",
+            ajax: "{{ route('child_category.index') }}",
             columns: [{
                   data: 'DT_RowIndex',
                   name: 'DT_RowIndex'
+               },
+               {
+                  data: 'child_category_name',
+                  name: 'child_category_name'
                },
                {
                   data: 'sub_category_name',
@@ -57,6 +62,7 @@
                   data: 'parent_id',
                   name: 'parent_id'
                },
+               
                {
                   data: 'meta_title',
                   name: 'meta_title'

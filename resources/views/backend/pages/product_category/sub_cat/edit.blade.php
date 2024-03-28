@@ -19,7 +19,7 @@
       <i class="icon ion-ios-home-outline"></i>
       <div>
          <h4>Sub Category</h4>
-         <p class="mg-b-0">Create Sub Category</p>
+         <p class="mg-b-0">Edit Sub Category</p>
       </div>
       <div class="float-right">
          <div> </div>
@@ -32,18 +32,17 @@
 
                <div class="pd-l-25 pd-r-15 pd-b-25">
                   <div id="ch5" class="">
-                     <form action="javascript:createSubCategory();" method="POST" enctype="multipart/form-data"
-                        id="subCatForm">
-                        {{-- <form action="{{ route('category.store') }}" method="POST" enctype="multipart/form-data"> --}}
+                     <form action="javascript:updateSubCategory();" method="POST" enctype="multipart/form-data"
+                        id="updateSubCatForm">
                         @csrf
+                        <input type="hidden" name="subCatID" value="{{ $subCat->id }}">
                         <div class="row mg-t-40 validation_message">
                            <div class="col-xl-12 mg-t-20 mg-xl-t-0">
                               <div class="row">
                                  <label class="col-sm-4 form-control-label"><span class="tx-danger">*</span> Category
                                     Name:</label>
                                  <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                                    <input type="text" name="sub_category_name" class="form-control"
-                                       placeholder="Enter product category">
+                                    <input type="text" name="sub_category_name" class="form-control" value="{{ $subCat->sub_category_name }}">
                                     @error('sub_category_name')
                                        <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -55,7 +54,7 @@
                                     <select name="parent_id" class="form-control" id="">
                                        <option value="0" selected disabled>Select Parent</option>
                                        @foreach ($mainCat as $cat )
-                                          <option value="{{ $cat->id }}">{{ $cat->category_name }}</option>
+                                          <option value="{{ $cat->id }}"@if($cat->id == $subCat->parent_id) selected @endif>{{ $cat->category_name }}</option>
                                        @endforeach
                                     </select>
                                     @error('slug')
@@ -67,8 +66,7 @@
                                  <label class="col-sm-4 form-control-label"><span class="tx-danger">*</span>Meta
                                     Title:</label>
                                  <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                                    <input type="text" name="meta_title" class="form-control"
-                                       placeholder="Enter meta title">
+                                    <input type="text" name="meta_title" class="form-control"value="{{ $subCat->meta_title }}">
                                     @error('meta_title')
                                        <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -77,8 +75,7 @@
                               <div class="row mg-t-20">
                                  <label class="col-sm-4 form-control-label"> Meta Description:</label>
                                  <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                                    <input type="text" name="meta_description" class="form-control"
-                                       placeholder="Enter meta description">
+                                    <input type="text" name="meta_description" class="form-control" value="{{ $subCat->meta_description}}">
                                     @error('meta_description')
                                        <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -88,8 +85,7 @@
                                  <label class="col-sm-4 form-control-label"><span class="tx-danger">*</span>Meta
                                     Keyword:</label>
                                  <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                                    <input type="text" name="meta_keyword" class="form-control"
-                                       placeholder="Enter meta keyword">
+                                    <input type="text" name="meta_keyword" class="form-control" value="{{ $subCat->meta_keyword }}">
                                     @error('meta_keyword')
                                        <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -101,8 +97,8 @@
                                  <div class="col-sm-8 mg-t-10 mg-sm-t-0">
                                     <select name="is_active" id="" class="form-control">
                                        <option value="" selected disabled>select</option>
-                                       <option value="1">Active</option>
-                                       <option value="0">In-active</option>
+                                       <option value="1" @if($subCat->is_active == 1) selected @endif>Active</option>
+                                       <option value="0" @if($subCat->is_active == 0) selected @endif>In-active</option>
                                     </select>
                                     @error('meta_keyword')
                                        <span class="text-danger">{{ $message }}</span>
@@ -133,7 +129,7 @@
    <script src="{{ asset('backend/app/jquery-validation/js/jquery.validate.min.js') }}"></script>
    <!--jquery validator -->
    <script>
-      $("#subCatForm").validate({
+      $("#updateSubCatForm").validate({
          rules: {
             sub_category_name: 'required',
             parent_id: 'required',
@@ -155,12 +151,12 @@
 
    <!--create category -->
    <script>
-      function createSubCategory() {
-         var form = $("#subCatForm");
+      function updateSubCategory() {
+         var form = $("#updateSubCatForm");
          var formData = new FormData(form[0]);
 
          $.ajax({
-            url: "{{ route('sub_category.store') }}",
+            url: "{{ route('sub_category.update') }}",
             type: "POST",
             data: formData,
             processData: false,

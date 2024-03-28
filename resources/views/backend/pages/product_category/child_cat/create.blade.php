@@ -1,7 +1,10 @@
+@php
+   use App\Models\SubCategory;
+@endphp
 @extends('backend.layouts.template')
 
 @section('title')
-   Sub Category || Create
+   Child Category || Create
 @endsection
 
 @section('style')
@@ -18,8 +21,8 @@
    <div class="br-pagetitle">
       <i class="icon ion-ios-home-outline"></i>
       <div>
-         <h4>Sub Category</h4>
-         <p class="mg-b-0">Create Sub Category</p>
+         <h4>Child Category</h4>
+         <p class="mg-b-0">Create Child Category</p>
       </div>
       <div class="float-right">
          <div> </div>
@@ -32,33 +35,37 @@
 
                <div class="pd-l-25 pd-r-15 pd-b-25">
                   <div id="ch5" class="">
-                     <form action="javascript:createSubCategory();" method="POST" enctype="multipart/form-data"
-                        id="subCatForm">
-                        {{-- <form action="{{ route('category.store') }}" method="POST" enctype="multipart/form-data"> --}}
+                     <form action="javascript:createChildCategory();" method="POST" enctype="multipart/form-data" id="childCatForm">
                         @csrf
                         <div class="row mg-t-40 validation_message">
                            <div class="col-xl-12 mg-t-20 mg-xl-t-0">
                               <div class="row">
-                                 <label class="col-sm-4 form-control-label"><span class="tx-danger">*</span> Category
+                                 <label class="col-sm-4 form-control-label"><span class="tx-danger">*</span> Child Category
                                     Name:</label>
                                  <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                                    <input type="text" name="sub_category_name" class="form-control"
-                                       placeholder="Enter product category">
-                                    @error('sub_category_name')
+                                    <input type="text" name="child_category_name" class="form-control" placeholder="Enter child category">
+                                    @error('child_category_name')
                                        <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                  </div>
                               </div>
                               <div class="row mg-t-20">
-                                 <label class="col-sm-4 form-control-label"> Select Parent Category</label>
+                                 <label class="col-sm-4 form-control-label"> Select Sub Category</label>
                                  <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                                    <select name="parent_id" class="form-control" id="">
+                                    <select name="sub_category_id" class="form-control" id="">
                                        <option value="0" selected disabled>Select Parent</option>
-                                       @foreach ($mainCat as $cat )
-                                          <option value="{{ $cat->id }}">{{ $cat->category_name }}</option>
+                                       @foreach ($mainCat as $cat)
+                                          @php
+                                             $subCat = SubCategory::where('parent_id', $cat->id)->get();
+                                          @endphp
+                                           <option value="{{ $cat->id }}" disabled style="color:orange">{{ $cat->category_name }}</option>
+                                          @foreach ($subCat as $sub )
+                                          <option value="{{ $sub->id }}">__{{ $sub->sub_category_name }}</option>
+                                          @endforeach
+                                         
                                        @endforeach
                                     </select>
-                                    @error('slug')
+                                    @error('sub_category_id')
                                        <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                  </div>
@@ -135,16 +142,16 @@
    <script>
       $("#subCatForm").validate({
          rules: {
-            sub_category_name: 'required',
-            parent_id: 'required',
+            child_category_name: 'required',
+            sub_category_id: 'required',
             meta_title: 'required',
             meta_description: 'required',
             meta_keyword: 'required',
             is_active: 'required',
          },
          messages: {
-            sub_category_name: 'Please enter your category name',
-            parent_id: 'Please select main category name',
+            child_category_name: 'Please enter your category name',
+            sub_category_id: 'Please select sub category name',
             meta_title: 'Please enter your meta title',
             meta_description: 'Please enter your meta description',
             meta_keyword: 'Please enter your meta keyword',
@@ -155,12 +162,12 @@
 
    <!--create category -->
    <script>
-      function createSubCategory() {
-         var form = $("#subCatForm");
+      function createChildCategory() {
+         var form = $("#childCatForm");
          var formData = new FormData(form[0]);
 
          $.ajax({
-            url: "{{ route('sub_category.store') }}",
+            url: "{{ route('child_category.store') }}",
             type: "POST",
             data: formData,
             processData: false,
@@ -169,7 +176,7 @@
                if (response.success) {
                   toastr.success(response.message);
                   setTimeout(function() {
-                     window.location.href = '{{ route('sub_category.index') }}';
+                     window.location.href = '{{ route('child_category.index') }}';
                   }, 1000);
                } else {
                   window.location.reload();

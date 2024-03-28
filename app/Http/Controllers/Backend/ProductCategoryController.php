@@ -35,32 +35,7 @@ class ProductCategoryController extends Controller
             }
             return view('backend.pages.product_category.index');
     }
-
-    public function test(Request $request){
-        if ($request->ajax()) {
-            $data = ProductCategory::latest()->get();
-            return Datatables::of($data)
-                ->addIndexColumn()
-                ->addColumn('name', function($row){
-                    return $row->category_name;
-                })
-                ->addColumn('parent_id', function($row){
-                    if($row->parant_id == 0){
-                        $sub = '<span class="alert alert-primary">sub-Category</span>';
-                    }else{
-                        $sub = '<span class="alert alert-primary">Main Category</span>';
-                    }
-                    return $sub;
-                })
-                ->addColumn('action', function($row){
-                    $actionBtn = '<a href="javascript:void(0)" class="edit btn btn-success btn-sm">Edit</a> <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Delete</a>';
-                    return $actionBtn;
-                })
-                ->rawColumns(['name','parent_id','action'])
-                ->make(true);
-        }
-        return view('backend.pages.product_category.test');
-    }
+  
     // public function create(){
     //     // $category = ProductCategory::where('parent_id', 0)->get();
     //     return view('backend.pages.product_category.create');
