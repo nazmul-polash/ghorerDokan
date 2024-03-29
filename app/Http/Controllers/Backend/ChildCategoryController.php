@@ -33,6 +33,7 @@ class ChildCategoryController extends Controller
                 })
                 ->addColumn('action', function ($row) {
                     $update =  '<a href="' . route('child_category.edit', $row->id) . '" class="btn btn-primary btn-sm" style="color:white;"> <i class="fa fa-edit"></i></a>';
+                    
                     $delete =  '<button data-target="' . route('child_category.delete', $row->id) . '" type="button" id="delete" class="btn btn-danger btn-sm"> <i class="fa fa-trash"></i></button>';
                     return $update . " " . $delete;
                 })

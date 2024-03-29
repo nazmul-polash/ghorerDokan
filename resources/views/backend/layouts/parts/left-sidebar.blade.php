@@ -10,33 +10,31 @@
             </a>
          </li>
 
-         {{-- <li class="br-menu-item">
-            <a href="{{ route('category.index') }}" class="br-menu-link {{  Route::currentRouteNamed('category.index') || Route::currentRouteNamed('category.create')? 'active':' ' }}">
-               <i class="menu-item-icon icon ion-ios-list-outline tx-22"></i>
-               <span class="menu-item-label">Product Category</span>
-            </a>
-         </li> --}}
-
          <li class="br-menu-item">
-            <a href="#" class="br-menu-link with-sub {{  Route::currentRouteNamed('category.index') || Route::currentRouteNamed('category.create') || Route::currentRouteNamed('sub_category.index') || Route::currentRouteNamed('sub_category.create') || Route::currentRouteNamed('child_category.index') || Route::currentRouteNamed('child_category.create')? 'show-sub active':' ' }}">
+            <a href="#" class="br-menu-link with-sub {{  Route::currentRouteNamed('category.index') || Route::currentRouteNamed('category.create') || Route::currentRouteNamed('sub_category.index') || Route::currentRouteNamed('sub_category.create') || Route::currentRouteNamed('sub_category.edit') || Route::currentRouteNamed('child_category.index') || Route::currentRouteNamed('child_category.create')|| Route::currentRouteNamed('child_category.edit')? 'show-sub active':' ' }}">
                <i class="menu-item-icon icon ion-ios-filing-outline tx-24"></i>
                <span class="menu-item-label">Product Category</span>
             </a>
             <ul class="br-menu-sub">
                <li class="sub-item"><a href="{{ route('category.index') }}" class="sub-link {{  Route::currentRouteNamed('category.index') || Route::currentRouteNamed('category.create')? 'active':' ' }}">Main Category</a></li>
-               <li class="sub-item"><a href="{{ route('sub_category.index') }}" class="sub-link {{  Route::currentRouteNamed('sub_category.index') || Route::currentRouteNamed('sub_category.create') ? 'active':' ' }}">Sub Category</a></li>
+               <li class="sub-item"><a href="{{ route('sub_category.index') }}" class="sub-link {{  Route::currentRouteNamed('sub_category.index') || Route::currentRouteNamed('sub_category.create') || Route::currentRouteNamed('sub_category.edit') ? 'active':' ' }}">Sub Category</a></li>
 
-               <li class="sub-item"><a href="{{ route('child_category.index') }}" class="sub-link {{ Route::currentRouteNamed('child_category.index') || Route::currentRouteNamed('child_category.create') ? 'active': ' ' }}">Child Category</a></li>
+               <li class="sub-item"><a href="{{ route('child_category.index') }}" class="sub-link {{ Route::currentRouteNamed('child_category.index') || Route::currentRouteNamed('child_category.create') || Route::currentRouteNamed('child_category.edit')? 'active': ' ' }}">Child Category</a></li>
             </ul>
          </li>
 
          <li class="br-menu-item">
+            <a href="{{ route('brand.index') }}" class="br-menu-link {{  Route::currentRouteNamed('brand.index') ? 'active':' ' }}">
+               <i class="menu-item-icon icon ion-cube tx-24"></i>
+               <span class="menu-item-label">Brand</span>
+            </a>
+         </li>
+         <li class="br-menu-item">
             <a href="{{ route('product.index') }}" class="br-menu-link {{  Route::currentRouteNamed('product.index') || Route::currentRouteNamed('product.create')? 'active':' ' }}">
                <i class="menu-item-icon icon ion-cube tx-24"></i>
                <span class="menu-item-label">Product</span>
-            </a><!-- br-menu-link -->
-
-         </li><!-- br-menu-item -->
+            </a>
+         </li>
          <li class="br-menu-item">
             <a href="mailbox.html" class="br-menu-link">
                <i class="menu-item-icon icon ion-ios-email-outline tx-24"></i>
