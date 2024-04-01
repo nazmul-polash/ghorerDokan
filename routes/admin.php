@@ -3,10 +3,12 @@
 use App\Http\Controllers\Backend\AdminController;
 use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\ChildCategoryController;
+use App\Http\Controllers\Backend\CouponController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\ProductCategoryController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\SubCategoryController;
+use App\Http\Controllers\Backend\WareHouseController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -54,6 +56,23 @@ Route::group(['prefix' => 'admin', 'middleware' => 'superAdmin'], function () {
         });
     });
 
+    Route::group(['prefix' => 'warehouse'], function () {
+        Route::get('list', [WareHouseController::class, 'index'])->name('warehouse.index');
+        Route::post('store', [WareHouseController::class, 'store'])->name('warehouse.store');
+        Route::get('edit/{id}', [WareHouseController::class, 'edit'])->name('warehouse.edit');
+        Route::post('update', [WareHouseController::class, 'update'])->name('warehouse.update');
+        Route::get('delete{id}', [WareHouseController::class, 'delete'])->name('warehouse.delete');
+    });
+
+    Route::group(['prefix' => 'offer'], function () {
+        Route::group(['prefix' => 'coupon'], function () {
+            Route::get('list', [CouponController::class, 'index'])->name('coupon.index');
+            Route::post('store', [CouponController::class, 'store'])->name('coupon.store');
+            Route::get('edit/{id}', [CouponController::class, 'edit'])->name('coupon.edit');
+            Route::post('update', [CouponController::class, 'update'])->name('coupon.update');
+            Route::get('delete{id}', [CouponController::class, 'delete'])->name('coupon.delete');
+        });
+    });
 
 
 
