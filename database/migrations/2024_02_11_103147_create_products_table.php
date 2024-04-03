@@ -17,17 +17,22 @@ return new class extends Migration
             $table->unsignedBigInteger('sub_category_id');
             $table->integer('child_category_id')->nullable();
             $table->integer('brand_id')->nullable();
+            $table->integer('pickup_point_id')->nullable();
 
             $table->string('product_name' ,100);
             $table->string('product_code' ,100)->nullable();
             $table->string('product_unit' ,100)->nullable();
             $table->string('product_model' ,100)->nullable();
-            $table->string('product_tags' ,100)->nullable();
-            $table->string('product_video' ,100)->nullable();
+            $table->string('product_tags')->nullable();
+            $table->string('product_color')->nullable();
+            $table->string('product_size')->nullable();
+
+            $table->string('product_video')->nullable();
             $table->string('purchase_price' ,100)->nullable();
             $table->string('selling_price' ,100)->nullable();
             $table->string('discount_price' ,100)->nullable();
             $table->string('stock_quantity')->nullable();
+
             $table->string('warehouse' ,100)->nullable();
             $table->text('description')->nullable();
             $table->string('thumbnail')->nullable();

@@ -5,6 +5,7 @@ use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\ChildCategoryController;
 use App\Http\Controllers\Backend\CouponController;
 use App\Http\Controllers\Backend\DashboardController;
+use App\Http\Controllers\Backend\PickupPointController;
 use App\Http\Controllers\Backend\ProductCategoryController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\SubCategoryController;
@@ -62,6 +63,13 @@ Route::group(['prefix' => 'admin', 'middleware' => 'superAdmin'], function () {
         Route::get('edit/{id}', [WareHouseController::class, 'edit'])->name('warehouse.edit');
         Route::post('update', [WareHouseController::class, 'update'])->name('warehouse.update');
         Route::get('delete{id}', [WareHouseController::class, 'delete'])->name('warehouse.delete');
+    });
+    Route::group(['prefix' => 'pickup-point'], function () {
+        Route::get('list', [PickupPointController::class, 'index'])->name('pickup_point.index');
+        Route::post('store', [PickupPointController::class, 'store'])->name('pickup_point.store');
+        Route::get('edit/{id}', [PickupPointController::class, 'edit'])->name('pickup_point.edit');
+        Route::post('update', [PickupPointController::class, 'update'])->name('pickup_point.update');
+        Route::get('delete{id}', [PickupPointController::class, 'delete'])->name('pickup_point.delete');
     });
 
     Route::group(['prefix' => 'offer'], function () {

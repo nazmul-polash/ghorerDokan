@@ -14,7 +14,7 @@
       <li class="br-menu-item">
          <a href="#"
             class="br-menu-link with-sub {{ Route::currentRouteNamed('category.index') || Route::currentRouteNamed('category.create') || Route::currentRouteNamed('sub_category.index') || Route::currentRouteNamed('sub_category.create') || Route::currentRouteNamed('sub_category.edit') || Route::currentRouteNamed('child_category.index') || Route::currentRouteNamed('child_category.create') || Route::currentRouteNamed('child_category.edit') ? 'show-sub active' : ' ' }}">
-            <i class="menu-item-icon icon ion-ios-filing-outline tx-24"></i>
+            <i class="menu-item-icon icon ion-shuffle tx-24"></i>
             <span class="menu-item-label">Product Category</span>
          </a>
          <ul class="br-menu-sub">
@@ -41,15 +41,23 @@
       <li class="br-menu-item">
          <a href="{{ route('warehouse.index') }}"
             class="br-menu-link {{ Route::currentRouteNamed('warehouse.index') ? 'active' : ' ' }}">
-            <i class="menu-item-icon icon ion-cube tx-24"></i>
+            <i class="menu-item-icon icon ion-home tx-24"></i>
             <span class="menu-item-label">WareHouse</span>
          </a>
       </li>
       <li class="br-menu-item">
          <a href="{{ route('product.index') }}"
             class="br-menu-link {{ Route::currentRouteNamed('product.index') || Route::currentRouteNamed('product.create') ? 'active' : ' ' }}">
-            <i class="menu-item-icon icon ion-cube tx-24"></i>
+            <i class="menu-item-icon icon ion-clipboard tx-24"></i>
             <span class="menu-item-label">Product</span>
+         </a>
+      </li>
+
+      <li class="br-menu-item">
+         <a href="{{ route('pickup_point.index') }}"
+            class="br-menu-link {{ Route::currentRouteNamed('pickup_point.index') ? 'active' : ' ' }}">
+            <i class="menu-item-icon icon ion-pin tx-24"></i>
+            <span class="menu-item-label">Pickuo Point</span>
          </a>
       </li>
 
@@ -63,6 +71,22 @@
             <li class="sub-item"><a href="{{ route('coupon.index') }}"
                   class="sub-link {{ Route::currentRouteNamed('coupon.index') ? 'active' : ' ' }}">Coupon</a></li>
             <li class="sub-item"><a href="" class="sub-link">E-campaign</a></li>
+
+         </ul>
+      </li>
+
+      <li class="br-menu-item">
+         <a href="#"
+            class="br-menu-link with-sub {{ Route::currentRouteNamed('coupon.index') ? 'show-sub active' : ' ' }}">
+            <i class="menu-item-icon ion-ios-gear-outline tx-24"></i>
+            <span class="menu-item-label">Settings</span>
+         </a>
+         <ul class="br-menu-sub">
+            <li class="sub-item"><a href="" class="sub-link">SEO Setting</a></li>
+            <li class="sub-item"><a href="" class="sub-link">WebSite Setting</a></li>
+            <li class="sub-item"><a href="" class="sub-link">Page Management</a></li>
+            <li class="sub-item"><a href="" class="sub-link">SMTP Setting</a></li>
+            <li class="sub-item"><a href="" class="sub-link">Payment Getway</a></li>
 
          </ul>
       </li>
