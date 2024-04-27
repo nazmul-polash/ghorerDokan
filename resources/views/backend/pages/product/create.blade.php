@@ -5,22 +5,13 @@
 @endsection
 @section('style')
    <link rel="stylesheet" href="{{ asset('backend/app') }}/image_uploader/image-uploader.min.css">
+   <link href="{{ asset('backend/app') }}/lib/summernote/summernote-bs4.css" rel="stylesheet">
+   <link rel="stylesheet" href="{{ asset('backend/app') }}/image_uploader/image-uploader.min.css">
+   <link href="{{ asset('backend/app') }}/lib/bootstrap-tagsinput/bootstrap-tagsinput.css" rel="stylesheet">
+   <link rel="stylesheet" type="text/css" href="https://jeremyfagis.github.io/dropify/dist/css/dropify.min.css">
 
    <style>
-      .steps-wrapper {
-         display: flex;
-         overflow: hidden;
-      }
 
-      .stpes {
-         min-width: 100%;
-         overflow-x: hidden;
-
-      }
-
-      .next {
-         margin-right: 15px;
-      }
    </style>
 @endsection
 
@@ -33,329 +24,474 @@
       </div>
    </div>
    <div class="br-pagebody">
-      <div class="row row-sm mg-t-20">
-         <div class="col-lg-12">
-            <div class="card bd-0 shadow-base">
-
-               <div class="pd-l-25 pd-r-15 pd-b-25">
-                  <div id="ch5" class="">
-                     <form action="{{ route('product.store') }}" method="POST" enctype="multipart/form-data"
-                        id="addProductForm">
-                        @csrf
-                        <div class="row mg-t-40">
-                           <div class="col-xl-12 mg-t-20 mg-xl-t-0">
-                              {{-- @if ($errors->any())
-                                 <div class="alert alert-danger">
-                                    <ul>
-                                       @foreach ($errors->all() as $error)
-                                          <li>{{ $error }}</li>
-                                       @endforeach
-                                    </ul>
-                                 </div>
-                              @endif --}}
-                              <div class="steps-wrapper">
-                                 <div class="stpes" id="step-1">
-                                    <div class="row">
-                                       <label class="col-sm-4 form-control-label"><span class="tx-danger">*</span> Product
-                                          Name:</label>
-                                       <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                                          <input type="text" name="product_name" class="form-control"
-                                             placeholder="Enter product name">
-                                             @error('product_name') <span class="text-danger">{{ $message  }}</span> @enderror
-                                       </div>
-                                    </div>
-                                    <div class="row mg-t-20">
-                                       <label class="col-sm-4 form-control-label"><span class="tx-danger">*</span> Product
-                                          Model:</label>
-                                       <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                                          <input type="text" name="product_model" class="form-control"
-                                             placeholder="Enter model">
-                                             @error('product_model') <span class="text-danger">{{ $message }}</span> @enderror
-                                       </div>
-                                    </div>
-                                    <div class="row mg-t-20">
-                                       <label class="col-sm-4 form-control-label"><span class="tx-danger">*</span> Product
-                                          Quantity:</label>
-                                       <div class="row wrap">
-                                          <div class="col-sm-2 mg-t-10 mg-sm-t-0">
-                                             <button type="button" class="mt-2" id="minus" style="border:none"><i
-                                                   class="fa fa-minus"></i></button>
-                                          </div>
-                                          <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                                             <input type="number" name="quantity" id="mainInput" class="form-control"
-                                                value="1">
-                                                @error('quantity') <span class="text-danger">{{ $message  }}</span> @enderror
-                                          </div>
-                                          <div class="col-sm-2 mg-t-10 mg-sm-t-0">
-                                             <button type="button" class="mt-2" style="border:none" id="plus"><i
-                                                   class="fa fa-plus"></i></button>
-                                          </div>
-                                       </div>
-                                    </div>
-                                    <div class="row mg-t-20">
-                                       <label class="col-sm-4 form-control-label"><span class="tx-danger">*</span> Product
-                                          Price:</label>
-                                       <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                                          <input type="number" name="product_price" class="form-control" id="price"
-                                             placeholder="Enter price">
-                                             @error('product_price') <span class="text-danger">{{ $message  }}</span> @enderror <br>
-                                          <label for="">Offer</label>
-                                          <div class="br-toggle br-toggle-rounded br-toggle-primary" style="top:8px">
-                                             <div class="br-toggle-switch"></div>
-                                          </div>
-                                          <div class="row" id="showOffer" style="display: none">
-                                             <div class="col-sm-6">
-                                                <input type="number" name="percentage_value" class="form-control"
-                                                   placeholder="Enter percentage" id="percentage">
-                                             </div>
-                                             <div class="col-sm-6">
-                                                <input type="number" name="total_price" class="form-control"
-                                                   id="total_price" readonly>
-                                             </div>
-                                          </div>
-                                       </div>
-                                    </div>
-                                    <div class="row mg-t-30">
-                                       <div class="col-sm-8 mg-l-auto">
-                                          <div class="form-layout-footer">
-                                             <button type="button" class="btn btn-info float-right next">Next</button>
-                                          </div>
-                                       </div>
-                                    </div>
-                                 </div>
-                                 <div class="stpes" id="step-2">
-                                    <div class="row mg-t-20">
-                                       <label class="col-sm-4 form-control-label"><span class="tx-danger">*</span>
-                                          Product
-                                          Image:</label>
-                                       <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                                          <input type="file" name="product_image" class="form-control"
-                                             placeholder="Enter product image">
-                                             @error('product_image') <span class="text-danger">{{ $message  }}</span> @enderror
-                                       </div>
-                                    </div>
-                                    <div class="row mg-t-20">
-                                       <label class="col-sm-4 form-control-label"> Product Multiple Image:</label>
-                                       <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                                          <div class="input-images"></div>
-                                       </div>
-                                    </div>
-                                    <div class="row mg-t-20">
-                                       <label class="col-sm-4 form-control-label"> More Item:</label>
-                                       <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                                          <div class="row ">
-
-                                             <div class="col-sm-5">
-                                                <input type="text" name="desc_1[]" class="form-control">
-                                             </div>
-                                             <div class="col-sm-5">
-                                                <input type="text" name="desc_2[]" class="form-control">
-                                             </div>
-                                             <div class="col-sm-2">
-                                                <div class="cngCls">
-                                                   <button type="button" class="btn btn-primary "
-                                                      onclick="addMore()"><i class="fa fa-plus"></i></button>
-                                                </div>
-                                             </div>
-
-                                          </div>
-
-                                          <div id="addMore">
-                                             <div class="row mg-t-10 default" style="display: none;">
-
-                                                <div class="col-sm-5">
-                                                   <input type="text" name="desc_1[]" class="form-control">
-                                                </div>
-                                                <div class="col-sm-5">
-                                                   <input type="text" name="desc_2[]" class="form-control">
-                                                </div>
-                                                <div class="col-sm-2">
-                                                   <div>
-                                                      <button type="button" class="btn btn-danger"
-                                                         onclick="closeBtn(this)"><i class="fa fa-trash"></i></button>
-                                                   </div>
-                                                </div>
-
-                                             </div>
-                                          </div>
-                                       </div>
-                                    </div>
-                                    <div class="row mg-t-30">
-                                       <div class="col-sm-8 mg-l-auto">
-                                          <div class="form-layout-footer">
-                                             <button type="button" class="btn btn-info previous">Previous</button>
-                                             <button type="button" class="btn btn-info float-right next">Next</button>
-                                          </div>
-                                       </div>
-                                    </div>
-                                 </div>
-                                 <div class="stpes" id="step-3">
-                                    <div class="row mg-t-20">
-                                       <label class="col-sm-4 form-control-label"><span class="tx-danger">*</span>
-                                          Product
-                                          Description:</label>
-                                       <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                                          <textarea rows="2" name="product_description" class="form-control" placeholder="Enter description"></textarea>
-                                          @error('product_description') <span class="text-danger">{{ $message  }}</span> @enderror
-                                       </div>
-                                    </div>
-                                    <div class="row mg-t-30">
-                                       <div class="col-sm-8 mg-l-auto">
-                                          <div class="form-layout-footer">
-                                             <button type="button" class="btn btn-info previous">Previous</button>
-                                             <button type="submit" class="btn btn-info float-right">Submit</button>
-                                          </div>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </div>
-
-                           </div><!-- col-6 -->
+      {{-- <div class="row">
+         <div class="col-md-8">
+            <div class="br-section-wrapper">
+               <form action="{{ route('product.store') }}" method="POST" enctype="multipart/form-data" id="addProductForm">
+                  @csrf
+                  <div class="form-layout form-layout-1">
+                     <div class="row mg-b-25">
+                        <div class="col-lg-4">
+                           <div class="form-group">
+                              <label class="form-control-label">Product Name: <span class="tx-danger">*</span></label>
+                              <input class="form-control" type="text" name="product_name" value="John Paul"
+                                 placeholder="Enter product name">
+                           </div>
                         </div>
-                     </form>
+                        <div class="col-lg-4">
+                           <div class="form-group">
+                              <label class="form-control-label">Product Code: <span class="tx-danger">*</span></label>
+                              <input class="form-control" type="text" name="product_code" value="McDoe"
+                                 placeholder="Enter code">
+                           </div>
+                        </div>
+                        <div class="col-lg-4">
+                           <div class="form-group">
+                              <label class="form-control-label">Product Unit: <span class="tx-danger">*</span></label>
+                              <input class="form-control" type="text" name="product_unit" value=""
+                                 placeholder="Enter unit">
+                           </div>
+                        </div>
+                        <div class="col-lg-4">
+                           <div class="form-group">
+                              <label class="form-control-label">Product Model: <span class="tx-danger">*</span></label>
+                              <input class="form-control" type="text" name="product_model" value=""
+                                 placeholder="Enter model">
+                           </div>
+                        </div>
+                        <div class="col-lg-4">
+                           <div class="form-group">
+                              <label class="form-control-label">Product Tags: <span class="tx-danger">*</span></label>
+                              <input class="form-control" type="text" name="product_tags" value=""
+                                 placeholder="Enter model">
+                           </div>
+                        </div>
+                        <div class="col-lg-4">
+                           <div class="form-group">
+                              <label class="form-control-label">Product Color: <span class="tx-danger">*</span></label>
+                              <input class="form-control" type="text" name="product_color" value=""
+                                 placeholder="Enter model">
+                           </div>
+                        </div>
+                        <div class="col-lg-4">
+                           <div class="form-group">
+                              <label class="form-control-label">Product Size: <span class="tx-danger">*</span></label>
+                              <input class="form-control" type="text" name="product_size" value=""
+                                 placeholder="Enter model">
+                           </div>
+                        </div>
+                        <div class="col-lg-4">
+                           <div class="form-group">
+                              <label class="form-control-label">Purchese Price: <span class="tx-danger">*</span></label>
+                              <input class="form-control" type="text" name="purchase_price" value=""
+                                 placeholder="Enter purchase price">
+                           </div>
+                        </div>
+                        <div class="col-lg-4">
+                           <div class="form-group">
+                              <label class="form-control-label">Selling Price: <span class="tx-danger">*</span></label>
+                              <input class="form-control" type="text" name="selling_price" value=""
+                                 placeholder="Enter selling price">
+                           </div>
+                        </div>
+                        <div class="col-lg-4">
+                           <div class="form-group">
+                              <label class="form-control-label">Discount Price: <span class="tx-danger">*</span></label>
+                              <input class="form-control" type="text" name="discount_price" value=""
+                                 placeholder="Enter discount price">
+                           </div>
+                        </div>
+                        <div class="col-lg-4">
+                           <div class="form-group">
+                              <label class="form-control-label">Stock Quantity: <span class="tx-danger">*</span></label>
+                              <input class="form-control" type="text" name="stock_quantity" value=""
+                                 placeholder="Enter quantity">
+                           </div>
+                        </div>
+                        <div class="col-lg-4">
+                           <div class="form-group mg-b-10-force">
+                              <label class="form-control-label">Ware House: <span class="tx-danger">*</span></label>
+                              <select class="form-control select2" data-placeholder="Choose ware house">
+                                 <option label="Choose country"></option>
+                                 <option value="USA">House 1</option>
+                                 <option value="USA">House 2</option>
+                                 <option value="USA">House 3</option>
+                              </select>
+                           </div>
+                        </div>
+                        <div class="col-lg-4">
+                           <div class="form-group">
+                              <label class="form-control-label">Product Vidoe: <span class="tx-danger">*</span></label>
+                              <input class="form-control" type="text" name="product_video" value=""
+                                 placeholder="Enter model">
+                           </div>
+                        </div>
+                        <div class="col-lg-8">
+                           <div class="form-group mg-b-10-force">
+                              <label class="form-control-label">Mail Address: <span class="tx-danger">*</span></label>
+                              <input class="form-control" type="text" name="address" value="Market St. San Francisco"
+                                 placeholder="Enter address">
+                           </div>
+                        </div><!-- col-8 -->
+                        <div class="col-lg-12">
+                           <div class="form-group mg-b-10-force">
+                              <label class="form-control-label">Description: <span class="tx-danger">*</span></label>
+                              <textarea name="description" id="summernote" class="form-control" cols="30" rows="10"></textarea>
+      
+                           </div>
+                        </div><!-- col-8 -->
+                        <div class="col-lg-4">
+                           <div class="form-group mg-b-10-force">
+                              <label class="form-control-label">Country: <span class="tx-danger">*</span></label>
+                              <select class="form-control select2" data-placeholder="Choose country">
+                                 <option label="Choose country"></option>
+                                 <option value="USA">United States of America</option>
+                                 <option value="UK">United Kingdom</option>
+                                 <option value="China">China</option>
+                                 <option value="Japan">Japan</option>
+                              </select>
+                           </div>
+                        </div>
+                     </div>
+      
+                     <div class="form-layout-footer">
+                        <button type="submit" class="btn btn-info">Submit Form</button>
+                        <button type="button" class="btn btn-secondary">Cancel</button>
+                     </div>
+                  </div>
+               </form>
+            </div>
+         </div>
+         <div class="col-md-4">
+
+            <div class="br-section-wrapper"></div>
+         </div>
+      </div> --}}
+
+      <form action="{{ route('product.store') }}" method="POST" enctype="multipart/form-data" id="addProductForm">
+         <div class="row row-sm mg-t-20">
+            @csrf
+            <div class="col-lg-8">
+               <div class="card mg-b-10">
+                  <div class="card-header tx-medium bd-0 tx-white bg-info" style="padding: 5px 5px">Category</div>
+                  <div class="card-body">
+                     <div class="row">
+                        <div class="col-lg-4">
+                           <div class="form-group mg-b-10-force">
+                              <label class="form-control-label">Category: <span class="tx-danger">*</span></label>
+                              <select name="category_id" class="form-control select2" onchange="getSubCat(this);"
+                                 id="category">
+                                 <option label="Choose country"></option>
+                                 @foreach ($category as $main)
+                                    <option value="{{ $main->id }}">{{ $main->category_name }}</option>
+                                 @endforeach
+                              </select>
+                           </div>
+                        </div>
+                        <div class="col-lg-4">
+                           <div class="form-group mg-b-10-force">
+                              <label class="form-control-label">Sub Category: <span class="tx-danger">*</span></label>
+                              <select name="sub_category_id" class="form-control select2" disabled id="subCategory"
+                                 onchange="getChildCat(this)"></select>
+                           </div>
+                        </div>
+                        <div class="col-lg-4">
+                           <div class="form-group mg-b-10-force">
+                              <label class="form-control-label">Child Category:</label>
+                              <select name="child_category_id" class="form-control select2" id="childCategory"
+                                 disabled></select>
+                           </div>
+                        </div>
+                        <div class="col-lg-12">
+                           <div class="form-group mg-b-10-force">
+                              <label class="form-control-label">Brand: <span class="tx-danger">*</span></label>
+                              <select name="brand_id" class="form-control select2">
+                                 <option label="Choose country"></option>
+                                 @foreach ($brands as $brand)
+                                    <option value="{{ $brand->id }}">{{ $brand->brand_name }}</option>
+                                 @endforeach
+                              </select>
+                           </div>
+                        </div>
+                     </div>
                   </div>
                </div>
-            </div><!-- card -->
 
 
+               <div class="card">
+                  <div class="card-header tx-medium bd-0 tx-white bg-info" style="padding: 5px 5px">Details</div>
+                  <div class="card-body">
+                     <div class="row mg-b-20">
+                        <div class="col-lg-6">
+                           <div class="form-group">
+                              <label class="form-control-label">Product Name: <span class="tx-danger">*</span></label>
+                              <input class="form-control" type="text" name="product_name"
+                                 placeholder="Enter product name">
+                           </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                           <div class="form-group">
+                              <label class="form-control-label">Product Code: <span class="tx-danger">*</span></label>
+                              <input class="form-control" type="text" name="product_code" value="McDoe"
+                                 placeholder="Enter code">
+                           </div>
+                        </div>
+                        <div class="col-lg-6">
+                           <div class="form-group">
+                              <label class="form-control-label">Product Model: <span class="tx-danger">*</span></label>
+                              <input class="form-control" type="text" name="product_model" value=""
+                                 placeholder="Enter model">
+                           </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                           <div class="form-group">
+                              <label class="form-control-label">Product Unit: <span class="tx-danger">*</span></label>
+                              <input class="form-control" type="text" name="product_unit" value=""
+                                 placeholder="Enter unit">
+                           </div>
+                        </div>
+                     </div>
+
+                     <div class="row mg-b-20">
+                        <div class="col-lg-6">
+                           <div class="form-group mg-b-10-force">
+                              <label class="form-control-label">Pickup Point: </label>
+                              <select name="pickup_point_id" class="form-control select2">
+                                 <option label="Choose country"></option>
+                                 @foreach ($pickupPoints as $data)
+                                    <option value="{{ $data->id }}">{{ $data->pickup_point_name }}</option>
+                                 @endforeach
+                              </select>
+                           </div>
+                        </div>
+                        <div class="col-lg-6">
+                           <div class="form-group mg-b-10-force">
+                              <label class="form-control-label">Ware House: <span class="tx-danger">*</span></label>
+                              <select class="form-control select2" data-placeholder="Choose ware house">
+                                 <option label="Choose country"></option>
+                                 @foreach ($wareHouses as $data)
+                                    <option value="{{ $data->id }}">{{ $data->warehouse_name }}</option>
+                                 @endforeach
+                              </select>
+                           </div>
+                        </div>
+                        <div class="col-lg-6">
+                           <div class="form-group">
+                              <label class="form-control-label">Product Vidoe: <span class="tx-danger">*</span></label>
+                              <input class="form-control" type="text" name="product_video" value=""
+                                 placeholder="Enter model">
+                           </div>
+                        </div>
+                        <div class="col-lg-6">
+                           <div class="form-group">
+                              <label class="form-control-label">Stock Quantity: <span class="tx-danger">*</span></label>
+                              <div class="d-flex qty" >
+                                 <button type="button" class="btn btn-default" id="minus"><i
+                                       class="fa fa-minus"></i></button>
+                                 <input class="form-control" type="number" id="mainInput" name="stock_quantity"
+                                    value="1">
+                                 <button type="button" class="btn btn-default" id="plus"><i
+                                       class="fa fa-plus"></i></button>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+
+                     <div class="row mg-b-20">
+                        <div class="col-lg-4">
+                           <div class="form-group">
+                              <label class="form-control-label">Purchese Price: <span class="tx-danger">*</span></label>
+                              <input class="form-control" type="text" name="purchase_price" value=""
+                                 placeholder="Enter purchase price">
+                           </div>
+                        </div>
+                        <div class="col-lg-4">
+                           <div class="form-group">
+                              <label class="form-control-label">Selling Price: <span class="tx-danger">*</span></label>
+                              <input class="form-control" type="text" name="selling_price" value=""
+                                 placeholder="Enter selling price">
+                           </div>
+                        </div>
+                        <div class="col-lg-4">
+                           <div class="form-group">
+                              <label class="form-control-label">Discount Price: <span class="tx-danger">*</span></label>
+                              <input class="form-control" type="text" name="discount_price" value=""
+                                 placeholder="Enter discount price">
+                           </div>
+                        </div>
+                     </div>
+
+                     <div class="row">
+                        <div class="col-lg-4">
+                           <div class="form-group">
+                              <label class="form-control-label">Product Tags: <span class="tx-danger">*</span></label>
+                              <input class="form-control" type="text" name="product_tags" data-role="tagsinput">
+                           </div>
+                        </div>
+                        <div class="col-lg-4">
+                           <div class="form-group">
+                              <label class="form-control-label">Product Color: <span class="tx-danger">*</span></label>
+                              <input class="form-control" type="text" name="product_color" data-role="tagsinput">
+                           </div>
+                        </div>
+                        <div class="col-lg-4">
+                           <div class="form-group">
+                              <label class="form-control-label">Product Size: <span class="tx-danger">*</span></label>
+                              <input class="form-control" type="text" name="product_size"data-role="tagsinput">
+                           </div>
+                        </div>
+                     </div>
+
+                     <div class="row">
+                        <div class="col-lg-12">
+                           <div class="form-group mg-b-10-force">
+                              <label class="form-control-label">Description: <span class="tx-danger">*</span></label>
+                              <textarea name="description" id="summernote" class="form-control" cols="30" rows="10"></textarea>
+
+                           </div>
+                        </div>
+
+                     </div>
+                  </div>
+               </div>
+            </div>
+
+            <div class="col-lg-4 mg-t-20 mg-lg-t-0">
+               <div class="card ">
+                  <div class="card-header tx-medium bd-0 tx-white bg-purple" style="padding: 5px 5px;"> Product
+                     Additional Part </div>
+                  <div class="card-body">
+                     <div class="form-group">
+                        <label class="form-control-label">Product Thamnail</label>
+                        <input type="file" name="thumbnail" class="form-control dropify" data-height="100">
+                     </div>
+                     <div class="form-group">
+                        <label class="form-control-label">Product Multipel Image</label>
+                        <div class="input-images"></div>
+                     </div>
+                     
+                     <div class="form-group">
+                        <label class="form-control-label">Product Feature</label><br>
+                        <div class="br-toggle br-toggle-success off">
+                           <div class="br-toggle-switch">
+                              
+                           </div>
+                        </div>
+                     </div>
+
+                     <div class="form-group">
+                        <label class="form-control-label">Today Deal</label><br>
+                        <div class="br-toggle br-toggle-success on">
+                           <div class="br-toggle-switch"></div>
+                        </div>
+                     </div>
+
+                     <div class="form-group">
+                        <label class="form-control-label">Product Status</label><br>
+                        <div class="br-toggle br-toggle-success on">
+                           <div class="br-toggle-switch"></div>
+                        </div>
+                     </div>
+
+                     <div class="form-layout-footer">
+                        <button type="submit" class="btn btn-info">Submit Form</button>
+                        <button type="button" class="btn btn-secondary">Cancel</button>
+                     </div>
+
+                  </div>
+               </div>
+            </div>
          </div>
-      </div>
+
+      </form>
+
    </div>
 @endsection
 
 @push('script')
-   <!--image uploader package -->
+   <script src="{{ asset('backend/app') }}/lib/summernote/summernote-bs4.min.js"></script>
    <script src="{{ asset('backend/app') }}/image_uploader/image-uploader.min.js"></script>
-   <script>
-      $('.input-images').imageUploader({
-         maxFiles: 3
-      });
-   </script>
+   <script src="{{ asset('backend/app') }}/lib/bootstrap-tagsinput/bootstrap-tagsinput.min.js"></script>
+   <script type="text/javascript" src="https://jeremyfagis.github.io/dropify/dist/js/dropify.min.js"></script>
 
-   <!-- miltiple input field -->
-   <script>
-      function addMore() {
-         // var defaultDiv = document.querySelector('.default');
-         // var cloneDiv = defaultDiv.cloneNode(defaultDiv)
-         // defaultDiv.style.display = '';
-         // var moreItemDiv = document.getElementById('addMore');
-         // moreItemDiv.appendChild(cloneDiv);
-         var container = $('#addMore');
-         var item = container.find('.default').clone();
-         //   item.('div.cngCls').remove();
-         // var $input = $('<input type="button" value="new button" />');
-         //    $input.appendTo(item);
-         item.removeClass('default');
-         item.appendTo(container).show();
-      }
-
-      function closeBtn(button) {
-         $(button).parent().parent().parent().remove();
-      }
-   </script>
-   <!-- next previous page -->
-   {{-- <script>
-      $('#steps').css('display', 'none');
-      $('#step-1').css('display', 'block');
-      function run(hideTab, showTab){
-         if(hideTab < showTab){
-          var currentTab = 0;
-          x = $('#step-'+hideTab);
-          y = $(x).find('input');
-          for(i= 0; i< y.length; i++){
-            if(y[i].value == ''){
-               $(y[i]).css('background', 'red');
-               return false;
-            }
-          }
-         }
-         $('#step-'+hideTab).css('display', 'none');
-         $('step-'+showTab).css('display', 'block');
-      }
-   </script> --}}
-
-   <!-- next previous page -->
-   <script>
-      $('.next').click(function() {
-         var scrollWidth = $('.stpes').width();
-         var wrapperPos = $('.steps-wrapper').scrollLeft();
-         $('.steps-wrapper').animate({
-            scrollLeft: wrapperPos + scrollWidth
-         }, 200);
-      })
-
-      $('.previous').click(function() {
-         var scrollWidth = $('.stpes').width();
-         var wrapperPos = $('.steps-wrapper').scrollLeft();
-         $('.steps-wrapper').animate({
-            scrollLeft: wrapperPos - scrollWidth
-         }, 200);
-      })
-   </script>
-
-   <!-- quantity plus minus -->
+   <!-- stock quantity plus and minus-->
    <script>
       $('#plus').click(function() {
-         $('#minus').prop('disabled', false);
-         var input = $(this).closest('.wrap').find('#mainInput');
-         input.val(+input.val() + 1);
+         $('#minus').prop('disabled',false)
+         var input = $(this).closest('.qty').find('#mainInput');
+         input.val(+input.val() +1)
       })
-
-      $('#minus').click(function() {
-         var input = $(this).closest('.wrap').find('#mainInput');
-         if (input.val() > 1) {
-            input.val(+input.val() - 1);
+      $('#minus').click(function(){
+         var input = $(this).closest('.qty').find('#mainInput');
+         if(input.val() > 1){
+            input.val(+input.val() - 1)
          }
-         if (input.val() == 1) {
-            $('#minus').prop('disabled', true);
+         if(input.val() == 1){
+            $('#minus').prop('disabled',true)
          }
       })
    </script>
 
-   <!-- percentage calculate -->
-   <script>
-      // Reusable helper functions
-      const calculateSale = (listPrice, discount) => {
-         listPrice = parseFloat(listPrice);
-         discount = parseFloat(discount);
-         return (listPrice - (listPrice * discount / 100)).toFixed(2);
-      }
-      const $list = $('input[name="product_price"]'),
-         $disc = $('input[name="percentage_value"]'),
-         $sale = $('input[name="total_price"]');
-      $list.add($disc).on('input', () => {
-         let sale = $list.val();
-         if ($disc.val().length) {
-            sale = calculateSale($list.val(), $disc.val());
-         }
-         $sale.val(sale);
-      });
-   </script>
 
 
-   <!-- offer show hide button -->
+   <!-- get sub category js-->
    <script>
-      $(function() {
-         $('.br-toggle').on('click', function(e) {
-            e.preventDefault();
-            $(this).toggleClass('on');
-            if ($(this).hasClass('on')) {
-               $('#showOffer').show();
-               console.log('show');
-            } else {
-               $('#showOffer').hide();
+      function getSubCat(id) {
+         var value = id.value;
+         $.ajax({
+            type: 'get',
+            url: '{{ route('get.subcategory') }}',
+            data: {
+               id: value,
+            },
+            success: function(response) {
+               $('#subCategory').prop("disabled", false);
+               $('#subCategory').html(response);
             }
-         })
-      })
+         });
+      }
+
+      function getChildCat(id) {
+         var value = id.value;
+         $.ajax({
+            type: 'get',
+            url: '{{ route('get.child.category') }}',
+            data: {
+               id: value,
+            },
+            success: function(response) {
+               $('#childCategory').prop("disabled", false);
+               $('#childCategory').html(response);
+            }
+         });
+      }
    </script>
 
 
-   {{-- <script>
-      $(document).ready(function() {
-         $('#percentage').on('input', function() {
-            var inputValue = $(this).val();
-            $('#total_price').val(inputValue);
-         });
+   <!-- summer note-->
+   <script>
+      $('#summernote').summernote({
+         height: 150,
+         tooltip: false
+      })
+   </script>
+   <!-- dropify js-->
+   <script>
+      $('.dropify').dropify();
+   </script>
+   <!-- image uploader-->
+   <script>
+      $('.input-images').imageUploader({
+         maxFiles: 10
       });
-   </script> --}}
+   </script>
+   <!-- Button toggle js-->
+   <script>
+      $('.br-toggle').on('click', function(e) {
+         e.preventDefault();
+         $(this).toggleClass('on');
+      })
+   </script>
 @endpush

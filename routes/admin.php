@@ -24,6 +24,14 @@ Route::group(['prefix' => 'admin', 'middleware' => 'superAdmin'], function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::group(['prefix' => 'product'], function () {
+
+        Route::get('list', [ProductController::class, 'index'])->name('product.index');
+        Route::get('create', [ProductController::class, 'create'])->name('product.create');
+        Route::post('store', [ProductController::class, 'store'])->name('product.store');
+
+        Route::get('sub/category/get',[ProductController::class, 'getSubCategory'])->name('get.subcategory');
+        Route::get('child/category/get',[ProductController::class, 'getChildCategory'])->name('get.child.category');
+
         Route::group(['prefix' => 'category'], function () {
             Route::get('list', [ProductCategoryController::class, 'index'])->name('category.index');
             // Route::get('create', [ProductCategoryController::class, 'create'])->name('category.create');
@@ -81,19 +89,4 @@ Route::group(['prefix' => 'admin', 'middleware' => 'superAdmin'], function () {
             Route::get('delete{id}', [CouponController::class, 'delete'])->name('coupon.delete');
         });
     });
-
-
-
-
-
-
-
-
-
-
-
-
-    Route::get('/product', [ProductController::class, 'index'])->name('product.index');
-    Route::get('/product/create', [ProductController::class, 'create'])->name('product.create');
-    Route::post('/product/store', [ProductController::class, 'store'])->name('product.store');
 });
