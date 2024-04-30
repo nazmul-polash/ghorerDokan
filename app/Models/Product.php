@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     use HasFactory;
+    protected $table = 'products';
+    protected $guarded = [];
+
+    public function multipleImages()
+    {
+        return $this->hasMany(ProductMultipleImage::class);
+    }
 }

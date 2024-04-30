@@ -14,12 +14,13 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('category_id');
-            $table->unsignedBigInteger('sub_category_id');
+            $table->unsignedBigInteger('sub_category_id')->nullable();;
             $table->integer('child_category_id')->nullable();
             $table->integer('brand_id')->nullable();
             $table->integer('pickup_point_id')->nullable();
 
             $table->string('product_name' ,100);
+            $table->string('slug')->nullable();
             $table->string('product_code' ,100)->nullable();
             $table->string('product_unit' ,100)->nullable();
             $table->string('product_model' ,100)->nullable();
@@ -37,7 +38,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->string('thumbnail')->nullable();
             $table->string('feature')->nullable();
-            $table->integer('today_dela')->nullable();
+            $table->integer('today_deal')->nullable();
             $table->boolean('is_active')->nullable();
             $table->integer('flash_deal_id')->nullable();
             $table->integer('cash_on_delivery')->nullable();

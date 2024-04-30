@@ -287,7 +287,7 @@
                         <div class="col-lg-6">
                            <div class="form-group">
                               <label class="form-control-label">Stock Quantity: <span class="tx-danger">*</span></label>
-                              <div class="d-flex qty" >
+                              <div class="d-flex qty">
                                  <button type="button" class="btn btn-default" id="minus"><i
                                        class="fa fa-minus"></i></button>
                                  <input class="form-control" type="number" id="mainInput" name="stock_quantity"
@@ -371,29 +371,30 @@
                         <label class="form-control-label">Product Multipel Image</label>
                         <div class="input-images"></div>
                      </div>
-                     
+
                      <div class="form-group">
                         <label class="form-control-label">Product Feature</label><br>
-                        <div class="br-toggle br-toggle-success off">
-                           <div class="br-toggle-switch">
-                              
-                           </div>
+                        <div class="br-toggle br-toggle-success off" id="productFeatureToggle">
+                            <div class="br-toggle-switch"></div>
                         </div>
-                     </div>
-
-                     <div class="form-group">
+                        <input type="hidden" name="feature" id="productFeatureValue" value="0">
+                    </div>
+                    
+                    <div class="form-group">
                         <label class="form-control-label">Today Deal</label><br>
-                        <div class="br-toggle br-toggle-success on">
-                           <div class="br-toggle-switch"></div>
+                        <div class="br-toggle br-toggle-success off" id="todayDealToggle">
+                            <div class="br-toggle-switch"></div>
                         </div>
-                     </div>
-
-                     <div class="form-group">
+                        <input type="hidden" name="today_deal" id="todayDealValue" value="0">
+                    </div>
+                    
+                    <div class="form-group">
                         <label class="form-control-label">Product Status</label><br>
-                        <div class="br-toggle br-toggle-success on">
-                           <div class="br-toggle-switch"></div>
+                        <div class="br-toggle br-toggle-success off" id="productStatusToggle">
+                            <div class="br-toggle-switch"></div>
                         </div>
-                     </div>
+                        <input type="hidden" name="status" id="productStatusValue" value="0">
+                    </div>
 
                      <div class="form-layout-footer">
                         <button type="submit" class="btn btn-info">Submit Form</button>
@@ -419,17 +420,17 @@
    <!-- stock quantity plus and minus-->
    <script>
       $('#plus').click(function() {
-         $('#minus').prop('disabled',false)
+         $('#minus').prop('disabled', false)
          var input = $(this).closest('.qty').find('#mainInput');
-         input.val(+input.val() +1)
+         input.val(+input.val() + 1)
       })
-      $('#minus').click(function(){
+      $('#minus').click(function() {
          var input = $(this).closest('.qty').find('#mainInput');
-         if(input.val() > 1){
+         if (input.val() > 1) {
             input.val(+input.val() - 1)
          }
-         if(input.val() == 1){
-            $('#minus').prop('disabled',true)
+         if (input.val() == 1) {
+            $('#minus').prop('disabled', true)
          }
       })
    </script>
@@ -490,8 +491,13 @@
    <!-- Button toggle js-->
    <script>
       $('.br-toggle').on('click', function(e) {
-         e.preventDefault();
-         $(this).toggleClass('on');
-      })
-   </script>
+          e.preventDefault();
+          $(this).toggleClass('on');
+          var toggleId = $(this).attr('id');
+          var valueFieldId = toggleId.replace('Toggle', 'Value');
+          var value = $('#' + valueFieldId).val();
+          value = value === '0' ? '1' : '0';
+          $('#' + valueFieldId).val(value);
+      });
+  </script>
 @endpush
