@@ -28,6 +28,33 @@ class ProductController extends Controller
             return DataTables::of($data)->addIndexColumn()
                 
 
+                ->addColumn('thumbnail', function ($row) {
+                    $image = asset('uploads/product/'.$row->thumbnail);
+                    $img = "<img src=\"$image\" alt=\"\" style=\"width:30px;height:30px;\">";
+                    return $img;
+                })
+                ->addColumn('category', function ($row) {
+                    return $row->category->category_name;
+                })
+                ->addColumn('code', function ($row) {
+                    return $row->product_code;
+                })
+                ->addColumn('product_model', function ($row) {
+                    return $row->product_model;
+                })
+                ->addColumn('stock_quantity', function ($row) {
+                    return $row->stock_quantity;
+                })
+                ->addColumn('price', function ($row) {
+                    return $row->selling_price;
+                })
+                ->addColumn('is_active', function ($row) {
+                    if($row->is_active == 1){
+                        return "<span class=\"badge badge-primary\">Active</span>";
+                    }else{
+                        return "<span class=\"badge badge-danger\">Inactive</span>";
+                    }
+                })
                 ->addColumn('created_by', function ($row) {
                     $name = auth()->user()->name;
                     return $name;
@@ -38,7 +65,7 @@ class ProductController extends Controller
                     $delete =  '<button data-target="' . route('child_category.delete', $row->id) . '" type="button" id="delete" class="btn btn-danger btn-sm"> <i class="fa fa-trash"></i></button>';
                     return $update . " " . $delete;
                 })
-                ->rawColumns(['created_by', 'action'])
+                ->rawColumns(['thumbnail','category','code','product_model','stock_quantity','price','is_active','','created_by', 'action'])
                 ->make(true);
         }
         return view('backend.pages.product.index');

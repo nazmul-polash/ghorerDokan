@@ -73,10 +73,6 @@
                   name: 'category'
                },
                {
-                  data: 'price',
-                  name: 'price'
-               },
-               {
                   data: 'product_code',
                   name: 'product_code'
                },
@@ -88,6 +84,10 @@
                {
                   data: 'stock_quantity',
                   name: 'stock_quantity'
+               },
+               {
+                  data: 'price',
+                  name: 'price'
                },
                {
                   data: 'is_active',

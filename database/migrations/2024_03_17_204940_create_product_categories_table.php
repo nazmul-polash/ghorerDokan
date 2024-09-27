@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('product_categories', function (Blueprint $table) {
-            $table->id();
+            $table->id();  // Creates an unsignedBigInteger by default
             $table->string('category_name');
             $table->string('slug');
             $table->string('meta_title');
@@ -21,7 +21,9 @@ return new class extends Migration
             $table->boolean('is_active')->default(true);
             $table->string('created_by')->nullable();
             $table->timestamps();
+            $table->engine = 'InnoDB';  
         });
+        
     }
 
     /**
