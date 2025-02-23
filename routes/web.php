@@ -2,6 +2,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\Frontend\ProductController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -19,6 +20,10 @@ use Illuminate\Support\Facades\Auth;
 //     return view('welcome');
 // });
 Route::get('/', [HomeController::class, 'index'])->name('/');
+
+
+Route::get('/product/quick/shop', [ProductController::class, 'quick_shop'])->name('product.quick.shop');
+Route::get('/product/details/{id}', [ProductController::class, 'product_details'])->name('product.details');
 
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

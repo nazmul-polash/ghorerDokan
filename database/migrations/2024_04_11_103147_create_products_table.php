@@ -44,6 +44,10 @@ return new class extends Migration
             $table->integer('cash_on_delivery')->nullable();
             $table->integer('created_by')->nullable();
             $table->boolean('is_discount')->nullable();
+
+            $table->boolean('is_bestseller')->default(false)->nullable();
+            $table->boolean('is_new_arrival')->default(false)->nullable();
+            $table->boolean('is_top_rated')->default(false)->nullable();
             $table->timestamps();
         
             // Foreign Key Constraints

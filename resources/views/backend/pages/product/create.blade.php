@@ -372,30 +372,60 @@
                         <div class="input-images"></div>
                      </div>
 
-                     <div class="form-group">
-                        <label class="form-control-label">Product Feature</label><br>
-                        <div class="br-toggle br-toggle-success off" id="productFeatureToggle">
-                            <div class="br-toggle-switch"></div>
+                     <div class="row">
+                        <div class="col-lg-6">
+                           <div class="form-group">
+                              <label class="form-control-label">Product Feature</label><br>
+                              <div class="br-toggle br-toggle-success off" id="productFeatureToggle">
+                                  <div class="br-toggle-switch"></div>
+                              </div>
+                              <input type="hidden" name="feature" id="productFeatureValue" value="0">
+                          </div>
+                          
+                          <div class="form-group">
+                              <label class="form-control-label">Today Deal</label><br>
+                              <div class="br-toggle br-toggle-success off" id="todayDealToggle">
+                                  <div class="br-toggle-switch"></div>
+                              </div>
+                              <input type="hidden" name="today_deal" id="todayDealValue" value="0">
+                          </div>
+                          
+                          <div class="form-group">
+                              <label class="form-control-label">Product Status</label><br>
+                              <div class="br-toggle br-toggle-success off" id="productStatusToggle">
+                                  <div class="br-toggle-switch"></div>
+                              </div>
+                              <input type="hidden" name="status" id="productStatusValue" value="0">
+                          </div>
                         </div>
-                        <input type="hidden" name="feature" id="productFeatureValue" value="0">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-control-label">Today Deal</label><br>
-                        <div class="br-toggle br-toggle-success off" id="todayDealToggle">
-                            <div class="br-toggle-switch"></div>
-                        </div>
-                        <input type="hidden" name="today_deal" id="todayDealValue" value="0">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-control-label">Product Status</label><br>
-                        <div class="br-toggle br-toggle-success off" id="productStatusToggle">
-                            <div class="br-toggle-switch"></div>
-                        </div>
-                        <input type="hidden" name="status" id="productStatusValue" value="0">
-                    </div>
 
+                        <div class="col-lg-6">
+                           <div class="form-group">
+                              <label class="form-control-label">Best Seller</label><br>
+                              <div class="br-toggle br-toggle-success off" id="bestSellerToggle">
+                                  <div class="br-toggle-switch"></div>
+                              </div>
+                              <input type="hidden" name="is_bestseller" id="bestSellerValue" value="0">
+                          </div>
+                          
+                          <div class="form-group">
+                              <label class="form-control-label">New Arrivals</label><br>
+                              <div class="br-toggle br-toggle-success off" id="newArrivalsToggle">
+                                  <div class="br-toggle-switch"></div>
+                              </div>
+                              <input type="hidden" name="is_new_arrival" id="newArrivalsValue" value="0">
+                          </div>
+                          
+                          <div class="form-group">
+                              <label class="form-control-label">Top Rated</label><br>
+                              <div class="br-toggle br-toggle-success off" id="topRatedToggle">
+                                  <div class="br-toggle-switch"></div>
+                              </div>
+                              <input type="hidden" name="is_top_rated" id="topRatedValue" value="0">
+                          </div>
+                        </div>
+                     </div>
+                     
                      <div class="form-layout-footer">
                         <button type="submit" class="btn btn-info">Submit Form</button>
                         <button type="button" class="btn btn-secondary">Cancel</button>
