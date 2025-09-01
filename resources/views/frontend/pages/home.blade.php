@@ -354,7 +354,7 @@
                                  </div>
                               </div>
                            </div>
-                         
+
                         @endforeach
                         {{-- <div class="item col-item">
                            <div class="product-box">
@@ -2339,10 +2339,10 @@
 
   <!-- =============================================================== -->
   <!-- Product Quickshop Modal-->
-<div class="quickshop-modal modal fade" id="quickshop_modal" tabindex="-1" aria-hidden="true">           
+<div class="quickshop-modal modal fade" id="quickshop_modal" tabindex="-1" aria-hidden="true">
    <div class="modal-dialog modal-lg modal-dialog-centered">
        <div class="modal-content" id="quickShopContent">
-           
+
        </div>
    </div>
 </div>
@@ -2365,5 +2365,5 @@
       });
    }
 </script>
-   
+
 @endpush

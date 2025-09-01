@@ -70,14 +70,14 @@
          <ul class="br-menu-sub">
             <li class="sub-item"><a href="{{ route('coupon.index') }}"
                   class="sub-link {{ Route::currentRouteNamed('coupon.index') ? 'active' : ' ' }}">Coupon</a></li>
-            <li class="sub-item"><a href="" class="sub-link">E-campaign</a></li>
+            <li class="sub-item"><a href="#" class="sub-link">E-campaign</a></li>
 
          </ul>
       </li>
 
       <li class="br-menu-item">
          <a href="#"
-            class="br-menu-link with-sub {{ Route::currentRouteNamed('coupon.index') ? 'show-sub active' : ' ' }}">
+            class="br-menu-link with-sub">
             <i class="menu-item-icon ion-ios-gear-outline tx-24"></i>
             <span class="menu-item-label">Settings</span>
          </a>
@@ -93,7 +93,7 @@
 
 
 
-      <li class="br-menu-item">
+      {{-- <li class="br-menu-item">
          <a href="mailbox.html" class="br-menu-link">
             <i class="menu-item-icon icon ion-ios-email-outline tx-24"></i>
             <span class="menu-item-label">Mailbox</span>
@@ -243,7 +243,7 @@
             <i class="menu-item-icon icon ion-ios-list-outline tx-22"></i>
             <span class="menu-item-label">Sitemap</span>
          </a><!-- br-menu-link -->
-      </li><!-- br-menu-item -->
+      </li><!-- br-menu-item --> --}}
    </ul><!-- br-sideleft-menu -->
 
    <label class="sidebar-label pd-x-10 mg-t-25 mg-b-20 tx-info">Information Summary</label>
